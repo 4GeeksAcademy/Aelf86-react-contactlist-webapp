@@ -1,15 +1,39 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { Context } from "../store/appContext";
 
-export const Home = () => (
-	<div className="text-center mt-5">
-		<h1>Hello Rigo!</h1>
-		<p>
-			<img src={rigoImage} />
-		</p>
-		<a href="#" className="btn btn-success">
-			If you see this green button, bootstrap is working
-		</a>
-	</div>
-);
+export const Home = () => {
+	const { actions, store } = useContext(Context)
+	useEffect(() => {
+		actions.createAgenda()
+		actions.getContacts()
+	}, [])
+	console.log(store.contacts);
+	return (
+		<div className="text-center mt-5">
+			{store.contacts.map((
+				item,index
+			) => (
+
+				<div key={index} className="card mb-3 " style={{ maxWidth: "540px" }}>
+
+					<div className="row g-0">
+						<div className="col-md-4">
+							<img src="https://img.a.transfermarkt.technology/portrait/header/58358-1683890647.jpg?lm=1" className="img-fluid rounded-start" alt="Average  german citizen" />
+						</div>
+						<div className="col-md-8">
+							<div className="card-body">
+								<p className="card-title">{item.name}</p>
+								<p className="card-title">{item.phone}</p>
+								<p className="card-text">{item.email}</p>
+								<p className="card-text">{item.address}</p>
+								<p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			))}
+		</div>
+	)
+}
