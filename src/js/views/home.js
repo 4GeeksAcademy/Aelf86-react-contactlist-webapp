@@ -9,11 +9,14 @@ export const Home = () => {
 		actions.createAgenda()
 		actions.getContacts()
 	}, [])
-	console.log(store.contacts);
+	//console.log(store.contacts);
+	const deleteContact = (id) =>{
+		actions.deleteContact(id)
+	}
 	return (
 		<div className="text-center mt-5">
 			{store.contacts.map((
-				item,index
+				item, index
 			) => (
 
 				<div key={index} className="card mb-3 " style={{ maxWidth: "540px" }}>
@@ -23,7 +26,11 @@ export const Home = () => {
 							<img src="https://img.a.transfermarkt.technology/portrait/header/58358-1683890647.jpg?lm=1" className="img-fluid rounded-start" alt="Average  german citizen" />
 						</div>
 						<div className="col-md-8">
-							<div className="card-body">
+							<div className="card-body " >
+								<button onClick={() => deleteContact(item.id)} className="btn btn-outline-dark float-end">
+									<i className="fas fa-trash">
+									</i>
+								</button>
 								<p className="card-title">{item.name}</p>
 								<p className="card-title">{item.phone}</p>
 								<p className="card-text">{item.email}</p>

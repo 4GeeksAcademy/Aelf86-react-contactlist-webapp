@@ -1,4 +1,4 @@
-import { ids } from "webpack";
+//import { ids } from "webpack";
 
 const apiUrl = process.env.API_URL
 const getState = ({ getStore, getActions, setStore }) => {
@@ -77,6 +77,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					const data = await response.json()
 					console.log(data)
+					getActions().getContacts()
 				} catch (error) {
 				console.error(error)
 				}
