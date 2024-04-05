@@ -51,6 +51,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			addContact: async (name, phone, email, address) => {
+				console.log(name, phone, email, address)
 				try {
 					const response = await fetch("https://playground.4geeks.com/contact/agendas/Alfredo/contacts", {
 						method: "POST",
@@ -69,15 +70,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error)
 				}
 			},
-			deleteContact: async (id) => {
+			//edit contact edit
+			editContact: async (name, phone, email, address, id) => {
+				console.log(name, phone, email, address)
+				console.log (name, phone, email, address, id)
 				try {
-					const response = await fetch ("https://playground.4geeks.com/contact/agendas/Alfredo/contacts/"+id, {
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/Alfredo/contacts/${id}`, {
+						method: "PUT",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							"name": name,
+							"phone": phone,
+							"email": email,
+							"address": address
+						})
+
+					})
+					const data = await response.json()
+					console.log(data)
+				} catch (error) {
+					console.log(error)
+				}
+			},
+
+			deleteContact: async (id) => {
+				const actions = getActions () 
+
+				
+				try {
+					const response = await fetch (`https://playground.4geeks.com/contact/agendas/Alfredo/contacts/${id}`, {
 						method:"DELETE",
 						headers: { "Content-Type": "application/json" },
 					})
 					const data = await response.json()
 					console.log(data)
-					getActions().getContacts()
+					actions.getContacts()
 				} catch (error) {
 				console.error(error)
 				}
