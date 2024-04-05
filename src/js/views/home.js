@@ -16,14 +16,14 @@ export const Home = () => {
 		actions.getContacts()
 	}
 	return (
-		<div className="text-center mt-5 container">
+		<div className="text-center mt-5 p-3 mb-2 bg-info text-dark">
 			{store.contacts.map((
 				item, index
 			) => (
 
-				<div key={index} className="card mb-3 d-flex" style={{ maxWidth: "540px" }}>
+				<div key={index} className="container card mb-3 " style={{ maxWidth: "540px" }}>
 
-					<div className="row g-0">
+					<div className="row g-0 d-flex justify-content-center">
 						<div className="col-md-4">
 							<img src="https://picsum.photos/200/300" className="img-fluid rounded-start" alt="User's picture" />
 						</div>
@@ -42,9 +42,9 @@ export const Home = () => {
 								</button>
 								</Link>
 								<p className="card-title">{item.name}</p>
-								<p className="card-title">{item.phone}</p>
-								<p className="card-text">{item.email}</p>
-								<p className="card-text">{item.address}</p>
+								<p className="card-title"><i className="fa-solid fa-phone"></i> {item.phone}</p>
+								<p className="card-text"> <i className="fa-solid fa-envelope"></i> {item.email}</p>
+								<p className="card-text"> <i className="fa-solid fa-location-dot"></i> {item.address}</p>
 								<p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
 							</div>
 						</div>
